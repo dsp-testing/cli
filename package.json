@@ -55,6 +55,7 @@
     "./package.json": "./package.json"
   },
   "dependencies": {
+    "@github/slsa-provenance": "^0.0.1",
     "@isaacs/string-locale-compare": "^1.1.0",
     "@npmcli/arborist": "^6.0.0-pre.0",
     "@npmcli/ci-detect": "^2.0.0",
@@ -128,6 +129,7 @@
     "write-file-atomic": "^4.0.1"
   },
   "bundleDependencies": [
+    "@github/slsa-provenance",
     "@isaacs/string-locale-compare",
     "@npmcli/arborist",
     "@npmcli/ci-detect",
