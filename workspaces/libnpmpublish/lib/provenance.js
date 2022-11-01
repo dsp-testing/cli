@@ -8,7 +8,7 @@ const BUILDER_ID_PREFIX = 'https://github.com/npm/slsa-provenance'
 const BUILD_TYPE_PREFIX = 'https://github.com/npm/slsa-provenance/gha'
 const BUILD_TYPE_VERSION = 'v0'
 
-const generateProvenance = async (subject) => {
+const generateProvenance = async (subject, opts={}) => {
   const { env } = process
   // Ensure that we're running in GHA and an OIDC token is available
   if (
@@ -22,7 +22,7 @@ const generateProvenance = async (subject) => {
   const provenance = getProvenance(subject)
   const payload = Buffer.from(JSON.stringify(provenance))
 
-  return sigstore.signAttestation(payload, INTOTO_PAYLOAD_TYPE)
+  return sigstore.signAttestation(payload, INTOTO_PAYLOAD_TYPE, opts)
 }
 
 const getProvenance = (subject) => {

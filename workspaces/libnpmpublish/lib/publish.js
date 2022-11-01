@@ -145,10 +145,14 @@ const buildMetadata = async (registry, manifest, tarballData, opts) => {
         name: `pkg:npm/${manifest.name}@${manifest.version}`,
         algorithm: 'sha512',
         digest: integrity.sha512[0].hexDigest(),
+      }, {
+        fulcioBaseURL: opts.fulcioBaseURL,
+        rekorBaseURL: opts.rekorBaseURL
       })
     } else {
       // TODO: Handle case where an existing bundle was supplied. Read bundle
       // from disk and verify
+
     }
 
     if (provenanceBundle) {
