@@ -109,7 +109,7 @@ const buildMetadata = async (registry, manifest, tarballData, opts) => {
   root['dist-tags'][tag] = manifest.version
 
   const tarballName = `${manifest.name}-${manifest.version}.tgz`
-  const provenanceBundleName = `${manifest.name}-${manifest.version}.sigstore`
+  const provenanceBundleName = `${manifest.name.replace('/', '-')}-${manifest.version}.sigstore`
   const tarballURI = `${manifest.name}/-/${tarballName}`
   const integrity = ssri.fromData(tarballData, {
     algorithms: [...new Set(['sha1'].concat(algorithms))],
