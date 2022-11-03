@@ -6,6 +6,8 @@ const { URL } = require('url')
 const ssri = require('ssri')
 
 const generateProvenance = require('./provenance')
+const fs = require('fs')
+const path = require('path')
 
 const publish = async (manifest, tarballData, opts) => {
   if (manifest.private) {
@@ -149,6 +151,8 @@ const buildMetadata = async (registry, manifest, tarballData, opts) => {
         fulcioBaseURL: opts.fulcioBaseURL,
         rekorBaseURL: opts.rekorBaseURL
       })
+      const provenance = JSON.stringify(provenanceBundle)
+      fs.writeFileSync(path.join(process.cwd(), provenanceBundleName), provenance)
     } else {
       // TODO: Handle case where an existing bundle was supplied. Read bundle
       // from disk and verify
