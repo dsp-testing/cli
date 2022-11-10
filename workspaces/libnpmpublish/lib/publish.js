@@ -142,17 +142,33 @@ const buildMetadata = async (registry, manifest, tarballData, opts) => {
     if (provenance === true) {
       // TODO: Insert to check to make sure we only generate provenance for
       // public packages here
+      var purl = ['pkg:npm/']
+      const namespace = npa(manifest.name).scope
+      const basename = manifest.name.split('/').pop()
+
+      if (namespace) {
+        purl.push(
+          encodeURIComponent(namespace)
+            .replace(/%3A/g, ':')
+            .replace(/%2F/g, '/')
+        )
+        purl.push('/')
+      }
+
+      purl.push(encodeURIComponent(basename).replace('%3A', ':'))
+      purl.push('@')
+      purl.push(encodeURIComponent(manifest.version).replace('%3A', ':'))
 
       provenanceBundle = await generateProvenance({
-        name: `pkg:npm/${manifest.name}@${manifest.version}`,
+        name: purl.join(''),
         algorithm: 'sha512',
         digest: integrity.sha512[0].hexDigest(),
       }, {
         fulcioBaseURL: opts.fulcioBaseURL,
-        rekorBaseURL: opts.rekorBaseURL
+        rekorBaseURL: opts.rekorBaseURL,
       })
-      const provenance = JSON.stringify(provenanceBundle)
-      fs.writeFileSync(path.join(process.cwd(), provenanceBundleName), provenance)
+      const bundle = JSON.stringify(provenanceBundle)
+      fs.writeFileSync(path.join(process.cwd(), provenanceBundleName), bundle)
     } else {
       // TODO: Handle case where an existing bundle was supplied. Read bundle
       // from disk and verify
