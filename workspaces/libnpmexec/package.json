@@ -60,11 +60,11 @@
   "dependencies": {
     "@npmcli/arborist": "^6.1.0",
     "@npmcli/ci-detect": "^3.0.0",
-    "@npmcli/run-script": "^5.0.0",
+    "@npmcli/run-script": "^10.0.4",
     "chalk": "^4.1.0",
     "npm-package-arg": "^10.0.0",
     "npmlog": "^7.0.1",
-    "pacote": "^15.0.2",
+    "pacote": "^21.4.0",
     "proc-log": "^3.0.0",
     "read": "^1.0.7",
     "read-package-json-fast": "^3.0.1",
