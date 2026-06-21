@@ -55,7 +55,7 @@
     "bin-links": "^4.0.1",
     "minify-registry-metadata": "^2.2.0",
     "mkdirp": "^1.0.4",
-    "tap": "^16.0.1"
+    "tap": "^21.7.4"
   },
   "dependencies": {
     "@npmcli/arborist": "^6.1.0",
